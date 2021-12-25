@@ -31,15 +31,16 @@ class App extends React.Component {
     };
 
     render() {
-        const filteredRobots = this.state.robots.filter((elem) => {
-            return elem.name
-                .toLowerCase()
-                .includes(this.state.searchField.toLowerCase());
+        // destructure from this.state
+        const { robots, searchField } = this.state;
+
+        const filteredRobots = robots.filter((elem) => {
+            return elem.name.toLowerCase().includes(searchField.toLowerCase());
         });
 
         // if the list of robots is length 0, that means the data fetch from the API
         // has not yet occured.
-        if (this.state.robots.length === 0) {
+        if (robots.length === 0) {
             return <h1>Loading</h1>;
         } else {
             return (
