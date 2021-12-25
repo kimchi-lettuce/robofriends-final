@@ -40,26 +40,24 @@ class App extends React.Component {
 
         // if the list of robots is length 0, that means the data fetch from the API
         // has not yet occured.
-        if (robots.length === 0) {
-            return <h1>Loading</h1>;
-        } else {
-            return (
-                <div className="tc">
-                    <h1 className="f1">Robofriends</h1>
+        return !robots.length ? (
+            <h1>Loading</h1>
+        ) : (
+            <div className="tc">
+                <h1 className="f1">Robofriends</h1>
 
-                    {/**We pass in the method to searchBox */}
-                    <SearchBox onChangeFunc={this.onSearchChange} />
+                {/**We pass in the method to searchBox */}
+                <SearchBox onChangeFunc={this.onSearchChange} />
 
-                    {/** Runs the CardList based on a filtered list of robot
-                     * Note that CardList is contained within the Scroll and is
-                     * automatically passed as props.children in the Scroll Component
-                     */}
-                    <Scroll>
-                        <CardList robots={filteredRobots} />
-                    </Scroll>
-                </div>
-            );
-        }
+                {/** Runs the CardList based on a filtered list of robot
+                 * Note that CardList is contained within the Scroll and is
+                 * automatically passed as props.children in the Scroll Component
+                 */}
+                <Scroll>
+                    <CardList robots={filteredRobots} />
+                </Scroll>
+            </div>
+        );
     }
 }
 
