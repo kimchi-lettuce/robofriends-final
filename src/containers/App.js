@@ -2,6 +2,7 @@ import React from "react";
 import CardList from "../components/CardList";
 import SearchBox from "../components/SearchBox";
 import Scroll from "../components/Scroll";
+import ErrorBoundary from "../components/ErrorBoundary";
 import "./App.css";
 
 // the CardList needs to interact with the SearchBox
@@ -49,13 +50,15 @@ class App extends React.Component {
                 {/**We pass in the method to searchBox */}
                 <SearchBox onChangeFunc={this.onSearchChange} />
 
-                {/** Runs the CardList based on a filtered list of robot
-                 * Note that CardList is contained within the Scroll and is
-                 * automatically passed as props.children in the Scroll Component
-                 */}
-                <Scroll>
-                    <CardList robots={filteredRobots} />
-                </Scroll>
+                <ErrorBoundary>
+                    {/** Runs the CardList based on a filtered list of robot
+                     * Note that CardList is contained within the Scroll and is
+                     * automatically passed as props.children in the Scroll Component
+                     */}
+                    <Scroll>
+                        <CardList robots={filteredRobots} />
+                    </Scroll>
+                </ErrorBoundary>
             </div>
         );
     }
